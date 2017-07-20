@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .cla {
+        background-color: blue;
+      }
+      .active {
+        background-color: red;
+      }
+    </style>
+    <script src="https://unpkg.com/vue" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{message}}
+    </div>
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+    <!-- <div id="app-7">
+      <ol>
+        <todo-item
+          v-for="item in groceryList"
+          v-bind:todo='item'
+          v-bind:key='item.id'>
+        </todo-item>
+      </ol>
+    </div> -->
+
+    <div id="acronym">
+      <a :href=url>百度</a>
+      <a @click="goto">goto</a>
+    </div>
+
+    <div id="computed">
+      <p>origin : "{{message}}"</p>
+      <p>computed : "{{reverse}}"</p>
+    </div>
+
+    <div  id="classEx">
+      <span v-bind:class="{cla: isActive}">我是class1</span>
+      <span v-bind:class="classObject">我是class2</span>
+    </div>
+
+
+    <div id="todo-list-example">
+      <input type="text"
+        v-model="newTodoText"
+        v-on:keyup.enter='addNewTodo'
+        placeholder="add a todo"
+      >
+      <ul>
+        <li
+          is="todo-item"
+          v-for="(todo, index) in todos"
+          v-bind:key="index"
+          v-bind:title="todo"
+          v-on:remove="todos.splice(index, 1)"
+        ></li>
+      </ul>
+    </div>
+
+    <div id="form1">
+      <input v-model="msg" type="text" name="" value="">
+      <p>msg is : {{msg}}</p>
+
+      <select v-model="selected">
+        <option disabled>请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Selected: {{selected}}</span>
+
+      <select v-model="select2">
+        <option v-for="option in options" v-bind:value="option.value">
+          {{option.text}}
+        </option>
+      </select>
+      <span>selected2: {{select2}}</span>
+
+      <input v-model.number="age" type="number">
+
+      <input v-model.trim="deleteTrim">
+      <label for="">{{deleteTrim}}</label>
+    </div>
+
+    <script src="app.js" charset="utf-8"></script>
+    <script src="form.js" charset="utf-8"></script>
+  </body>
+</html>
