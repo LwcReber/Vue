@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>兄弟组件通讯</title>
+    <script src="https://unpkg.com/vue" charset="utf-8"></script>
+  </head>
+  <body>
+    <h2>兄弟组件通讯 eventbus方法</h2>
+    <div id="todo">
+      <h2>vue todo demo</h2>
+      <new-todo></new-todo>
+      <todo-list></todo-list>
+    </div>
+  <script type="text/javascript">
+  // 新定义vue变量做事件总线
+    var eventHub = new Vue({
+      data() {
+        return {
+          todos: ["a", "b", "c"]
+        }
+      },
+      created () {
+        this.$on("add", this.addTodo)
+        this.$on("delete", this.deleteTodo)
+      },
+      beforeDestroy () {
+        this.$off("add", this.addTodo)
+        this.$off("delete", this.deleteTodo)
+      },
+      methods: {
+        addTodo (newdata) {
+          console.log(newdata);
+          this.todos.push(newdata)
+        },
+        deleteTodo (i) {
+          this.todos.splice(i, 1)
+        }
+      }
+    })
+    // 定义输入框
+    var newTodo = {
+      template: '<div><input type="text" autofocus v-model="newdata" @keyup.enter="add"/> \
+      <button @click="add" >add</button></div>',
+      data () {
+        return {
+          newdata: ''
+        }
+      },
+      methods: {
+        add () {
+          // 内容空返回
+          var str = this.newdata.replace(/(^\s*)|(\s*$)/g, '');//去除空格;
+          if (str == '' || str == undefined || str == null) return
+          console.log(this.newdata);
+          eventHub.$emit('add', this.newdata)
+          this.newdata = ''
+        }
+      }
+    }
+    var todoList = {
+      template: '<ul> \
+        <li v-for="(item,index) in items">{{item}} \
+          <button @click="rm(index)">X</button></li> \
+        </ul>',
+      data () {
+        return {
+          items: eventHub.todos
+        }
+      },
+      methods:　{
+        rm (i) {
+          eventHub.$emit('delete', i)
+        }
+      }
+    }
+    var app = new Vue({
+      el: "#todo",
+      components: {
+        newTodo: newTodo,
+        todoList: todoList
+      }
+    })
+  </script>
+  </body>
+</html>
