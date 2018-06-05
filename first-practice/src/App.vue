@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
-    <div class="left">
+    <!-- <div class="left">
       <NavTab/>
     </div>
     <div class="right">
       <router-view></router-view>
-    </div>
+    </div> -->
   </div>
 </template>
 
