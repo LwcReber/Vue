@@ -1,13 +1,12 @@
 {
-  "restartable": "rs",
+  "restartable": "res",
   "ignore": [
     ".git",
     "node_modules/**/node_modules",
-    ".eslintrc",
+    "eslinttrc",
     "client",
     "build/webpack.config.client.js",
-    "public",
-    "server-build"
+    "public"
   ],
   "verbose": true,
   "env": {

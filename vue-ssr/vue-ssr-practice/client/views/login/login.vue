@@ -36,20 +36,23 @@ export default {
       errorMsg: ''
     }
   },
+  mouted () {
+    console.log('login');
+  },
   methods: {
-    ...mapActions(['login']),
+    // ...mapActions(['login']),
     doSubmit (e) {
-      e.preventDefault()
-      if (this.validate()) {
-        // 调用接口
-        this.login({
-          username: this.username,
-          password: this.password
-        })
-          .then(() => {
-            this.$router.replace('/app')
-          })
-      }
+      // e.preventDefault()
+      // if (this.validate()) {
+      //   // 调用接口
+      //   this.login({
+      //     username: this.username,
+      //     password: this.password
+      //   })
+      //     .then(() => {
+      //       this.$router.replace('/app')
+      //     })
+      // }
     },
     validate () {
       if (!this.username.trim()) {

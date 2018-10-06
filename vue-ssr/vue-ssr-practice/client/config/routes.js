@@ -11,7 +11,7 @@ export default [
     path: '/app',
     props: true,
     // props: (route) => ({ id: route.query.b }),
-    component: () => import(/* webpackChunkName: "todo-view" */ '../views/todo/todo.vue'),
+    component: () => import(/* webpackChunkName: "todo-view" */ '../layout/todo.vue'),
     // component: Todo,
     name: 'app',
     meta: {
@@ -31,7 +31,6 @@ export default [
   },
   {
     path: '/login',
-    component: () => import(/* webpackChunkName: "login-view" */ '../views/login/login.vue')
-    // component: Login
+    component: () => import('../views/login/login.vue')
   }
 ]

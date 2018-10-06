@@ -2,11 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>documen t</title>
+    <%- title %>
     <%- style %>
   </head>
   <body>
-    <%- appString %>
+    <div id="root">
+      <%- appString %>
+    </div>
     <%- scripts %>
   </body>
 </html>

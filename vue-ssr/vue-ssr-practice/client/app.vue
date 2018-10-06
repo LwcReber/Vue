@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="cover"></div>
-    <Header></Header>
-    <todo></todo>
+    <Header>3243213211</Header>
+    <router-view></router-view>
+    <!-- <todo></todo> -->
     <Footer></Footer>
   </div>
 </template>
@@ -13,10 +14,13 @@ import Footer from './layout/footer.jsx'
 import Todo from './layout/todo.vue'
 
 export default {
+  metaInfo: {
+    title: 'reber\'s todo app'
+  },
   components: {
     Header,
     Footer,
-    Todo,
+    Todo
   }
 }
 </script>

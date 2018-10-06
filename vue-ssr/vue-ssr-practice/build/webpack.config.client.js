@@ -71,10 +71,10 @@ if (isDev) {
   config = merge(baseConfig, {
     entry: {
       app: path.join(__dirname, '../client/client-entry.js'),
-      // vendor: ['vue']
+      vendor: ['vue']
     },
     output: {
-      path: path.join(__dirname, '../dist'),
+      // path: path.join(__dirname, '../dist'),
       filename: '[name].[chunkhash:8].js',
       publicPath: '/public/'
     },
