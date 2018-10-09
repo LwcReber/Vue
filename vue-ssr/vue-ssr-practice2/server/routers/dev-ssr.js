@@ -32,6 +32,13 @@ const handleSSR = async (ctx) => {
     ctx.body = '等会，别急'
     return
   }
+
+  const clientManifestResp = await axiox.get(
+    'http://1270.00.1:8000/vue-ssr-client-manifest.json'
+  )
+
+  const clientManifest = clientManifestResp.data
+
   const template = fs.readFileSync(
     path.join(__dirname, '../server.template.ejs')
   )
@@ -39,7 +46,7 @@ const handleSSR = async (ctx) => {
   const renderer = VueServerRenderer
     .createBundleRenderer(bundle, {
       inject: false,
-      
+      clientManifest
     })
 
 }
