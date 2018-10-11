@@ -1,18 +1,15 @@
 import createApp from './create-app'
 
+// context 就是server-render 的context
 export default context => {
   return new Promise((resolve, reject) => {
-    const {app, router} = createApp()
-
+    const { app, router,  } = createApp()
     router.push(context.url)
-
     router.onReady(() => {
-      // 根据url匹配组件
-      const matchedComponents = router.getMatchedComponents()
-      if (!matchedComponents.length) {
-        return reject(new Error('no component mactched'))
+      const mathedComponents = router.getMatchedComponents()
+      if (!mathedComponents.length ) {
+        return reject(new Error('no component matched'))
       }
-      context.meta = app.$meta()
       resolve(app)
     })
   })

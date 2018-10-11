@@ -1,23 +1,19 @@
 const ejs = require('ejs')
 
 module.exports = async (ctx, renderer, template) => {
-  ctx.headers['ContentType'] = 'text/html'
-  //  用在服务端渲染，传到vueserverrenderer，方便渲染html
-  const context = { url: ctx.path }
+  ctx.header['Content-type'] ='text/html'
+  const context = { url: ctx.path } // 用在服务端渲染传到vue-renderer
+
   try {
-    const appString = await renderer.renderToString(context) // 一个promise对象
-    const {
-      title
-    } = context.meta.inject()
+    const appString = await renderer.renderToSrting(context)
     const html = ejs.render(template, {
       appString,
-      style: context.renderStyles(),
-      scripts: context.renderScripts(),
-      title: title.text()
+      style: context.renderStyle(),
+      scripts: context.renderScripts()
     })
     ctx.body = html
   } catch (err) {
-    console.log('render', err);
+    console.log('render err', err);
     throw err
   }
 }
