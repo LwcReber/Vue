@@ -1,9 +1,9 @@
 {
-  "restartable": "res",
+  "restartable": "rs",
   "ignore": [
     ".git",
     "node_modules/**/node_modules",
-    "eslinttrc",
+    "eslintrc",
     "client",
     "build/webpack.config.client.js",
     "public"

@@ -1,6 +1,8 @@
 const Koa = require('koa')
+const send = require('koa-send')
+const path = require('path')
 
-const pageRouter = require('./routers/dev-ssr')
+const staticRouter = require('./routers/static')
 
 const  app = new Koa()
 
@@ -22,6 +24,25 @@ app.use(async (ctx, next) => {
     }
   }
 })
+
+// favicon.ico 处理
+app.use(async (ctx, next) => {
+  if (ctx.path === '/favicon.ico') {
+    await send(ctx, '/favicon.ico', {root: path.join(__dirname, '../')})
+  } else {
+    await next()
+  }
+})
+
+app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
+
+
+let pageRouter
+if (isDev) {
+  pageRouter = require('./routers/dev-ssr')
+} else {
+   pageRouter = require('./routers/ssr')
+}
 
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
 
