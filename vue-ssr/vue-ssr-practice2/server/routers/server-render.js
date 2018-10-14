@@ -5,10 +5,10 @@ module.exports = async (ctx, renderer, template) => {
   const context = { url: ctx.path } // 用在服务端渲染传到vue-renderer
 
   try {
-    const appString = await renderer.renderToSrting(context)
+    const appString = await renderer.renderToString(context)
     const html = ejs.render(template, {
       appString,
-      style: context.renderStyle(),
+      style: context.renderStyles(),
       scripts: context.renderScripts()
     })
     ctx.body = html

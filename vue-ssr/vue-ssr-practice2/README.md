@@ -13,3 +13,7 @@ npm install
 ```
 npm run dev
 开始开发项目
+
+# 遇到的问题
+
+  1. vue-server-renderer 使用2.5.13版本不能使用最新版本 使用cnpm 手动安装对应的版本号

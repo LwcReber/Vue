@@ -14,7 +14,7 @@ config = merge(baseConfig, {
   devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs2', // 输出文件打包成模块，通过module.exports打包
-    filename: 'server-entry', // 不需要hash，因为不需要在浏览器运行，不用缓存
+    filename: 'server-entry.js', // 不需要hash，因为不需要在浏览器运行，不用缓存
     path: path.join(__dirname, '../server-build')
   },
   externals: Object.keys(require('../package.json').dependencies), // 不打包这些文件

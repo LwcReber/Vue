@@ -6,7 +6,7 @@ const MemoryFs = require('memory-fs') // 不把文件写入磁盘，直接写入
 const webpack = require('webpack')
 const VueServerRenderer = require('vue-server-renderer')
 
-const serverRenderer = require('./server-render')
+const serverRender = require('./server-render')
 const serverConfig = require('../../build/webpack.config.server')
 
 const serverCompiler = webpack(serverConfig)
@@ -39,14 +39,15 @@ const handleSSR = async (ctx) => {
   }
 
   // 开发环境向webpack-dev-server 获取对应的json文件
-  const clientManifestResp = await axiox.get(
-    'http://1270.00.1:8000/vue-ssr-client-manifest.json'
+  const clientManifestResp = await axios.get(
+    'http://127.0.0.1:8000/public/vue-ssr-client-manifest.json'
   )
 
   const clientManifest = clientManifestResp.data
 
   const template = fs.readFileSync(
-    path.join(__dirname, '../server.template.ejs')
+    path.join(__dirname, '../server.template.ejs'),
+    'utf-8'
   )
 
   const renderer = VueServerRenderer
@@ -54,7 +55,7 @@ const handleSSR = async (ctx) => {
       inject: false,
       clientManifest
     })
-    await serverRenderer(ctx, renderer, template)
+    await serverRender(ctx, renderer, template)
 }
 
 const router = new Router()
