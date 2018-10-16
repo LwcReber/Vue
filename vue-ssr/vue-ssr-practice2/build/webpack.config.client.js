@@ -27,7 +27,7 @@ const devServer = {
   overlay: {
     errors: true
   },
-  headers: { 'Access-Control-Allow-Origin': '*' },
+  headers: { 'Access-Control-Allow-Origin': '*' }, // 解决热更新跨域问题
   historyApiFallback: {
     index: '/public/index.html'
   },

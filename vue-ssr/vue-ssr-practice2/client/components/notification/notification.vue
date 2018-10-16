@@ -1,11 +1,8 @@
-<template>
-  <transition name="fade" @after-leave="afterLeave" @after-enter="afterEnter">
-    <div
-      class="notification"
-      :style="style"
-      v-show="visible"
-      @mouseenter="clearTimer"
-      @mouseleave="createTimer"
+<template lang="html">
+  <transition name="fade" @after-leave="afterLeave">
+    <div class="notification"
+    :style="style"
+    v-show="visible"
     >
       <span class="content">{{content}}</span>
       <a class="btn" @click="handleClose">{{btn}}</a>
@@ -32,7 +29,7 @@ export default {
     }
   },
   computed: {
-    style () {
+    sttyle () {
       return {}
     }
   },
@@ -42,16 +39,13 @@ export default {
       this.$emit('close')
     },
     afterLeave () {
-      this.$emit('closed')
-    },
-    afterEnter () {},
-    clearTimer () {},
-    createTimer () {}
+      this.$emit('closed') // 动画结束后的关闭
+    }
   }
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .notification
   display: inline-flex
   background-color #303030
@@ -70,5 +64,3 @@ export default {
   margin-left auto
   cursor pointer
 </style>
-
-

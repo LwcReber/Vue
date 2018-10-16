@@ -3,6 +3,8 @@
     <div id="cover"></div>
     <Header>3243213211</Header>
     <router-view></router-view>
+    <button @click="notify" name="button">test</button>
+    <!-- <notification  content="test notify"/> -->
     <!-- <todo></todo> -->
     <Footer></Footer>
   </div>
@@ -21,6 +23,17 @@ export default {
     Header,
     Footer,
     Todo
+  },
+  mounted () {
+
+  },
+  methods: {
+    notify () {
+      this.$notify({
+        content: 'test',
+        btn: 'close'
+      })
+    }
   }
 }
 </script>

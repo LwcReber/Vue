@@ -1,6 +1,7 @@
+// 扩展组件功能
 import Notification from './notification.vue'
 
-export default {
+export default  {
   extends: Notification,
   computed: {
     style () {
@@ -14,10 +15,18 @@ export default {
   mounted () {
     this.createTimer()
   },
+  data () {
+    return {
+      verticalOffset: 0,
+      autoClose: 3000
+    }
+  },
+  beforeDestory () {
+    this.clearTimer()
+  },
   methods: {
     createTimer () {
-      console.log(this.autoClose)
-      if (this.autoClose) {
+      if(this.autoClose) {
         this.timer = setTimeout(() => {
           this.visible = false
         }, this.autoClose)
@@ -27,20 +36,6 @@ export default {
       if (this.timer) {
         clearTimeout(this.timer)
       }
-    },
-    afterEnter () {
-      this.height = this.$el.offsetHeight
-    }
-  },
-  beforeDestory () {
-    this.clearTimer()
-  },
-  data () {
-    return {
-      verticalOffset: 0,
-      autoClose: 3000,
-      height: 0,
-      visible: false
     }
   }
 }
