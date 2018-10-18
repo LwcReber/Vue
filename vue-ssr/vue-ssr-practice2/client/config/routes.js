@@ -11,7 +11,7 @@ export default [
     path: '/app',
     props: true,
     // props: (route) => ({ id: route.query.b }),
-    component: () => import(/* webpackChunkName: "todo-view" */ '../layout/todo.vue'),
+    component: () => import(/* webpackChunkName: "todo-view" */ '../views/todo/todo.vue'),
     // component: Todo,
     name: 'app',
     meta: {

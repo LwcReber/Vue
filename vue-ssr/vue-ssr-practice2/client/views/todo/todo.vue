@@ -1,10 +1,19 @@
 <template>
   <section class="real-app">
-    <div class="tab-container">
+
+    <tabs value="1">
+      <tab label="tab1" index="1"></tab>
+      <tab index="1">
+        <span slot="label" style="color:red">tab2</span>
+      </tab>
+       <tab label="tab3" index="3"></tab>
+    </tabs>
+
+    <!-- <div class="tab-container">
       <tabs :value="filter" @change="handleChangeTab">
         <tab :label="tab" :index="tab" v-for="tab in stats" :key="tab" />
       </tabs>
-    </div>
+    </div> -->
     <input
       type="text"
       class="add-input"
@@ -17,10 +26,8 @@
       v-for="todo in filteredTodos"
       :key="todo.id"
       @del="deleteTodo"
-      @toggle="toggleTodoState"
     />
     <helper
-      :filter="filter"
       :todos="todos"
       @clearAllCompleted="clearAllCompleted"
     />
@@ -30,7 +37,8 @@
 
 <script>
 import {
-  mapState, mapActions
+  // mapState,
+  mapActions
 } from 'vuex'
 import Item from './item.vue'
 import Helper from './helper.vue'
@@ -60,13 +68,13 @@ export default {
       this.fetchTodos()
     }
   },
-  asyncData ({ store, router }) {
-    if (store.state.user) {
-      return store.dispatch('fetchTodos')
-    }
-    router.replace('/login')
-    return Promise.resolve()
-  },
+  // asyncData ({ store, router }) {
+  //   if (store.state.user) {
+  //     return store.dispatch('fetchTodos')
+  //   }
+  //   router.replace('/login')
+  //   return Promise.resolve()
+  // },
   data () {
     return {
       filter: 'all',
@@ -78,7 +86,7 @@ export default {
     Helper
   },
   computed: {
-    ...mapState(['todos']),
+    // ...mapState(['todos']),
     filteredTodos () {
       if (this.filter === 'all') {
         return this.todos
@@ -88,13 +96,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'fetchTodos',
-      'addTodo',
-      'deleteTodo',
-      'updateTodo',
-      'deleteAllCompleted'
-    ]),
+    // ...mapActions([
+    //   'fetchTodos',
+    //   'addTodo',
+    //   'deleteTodo',
+    //   'updateTodo',
+    //   'deleteAllCompleted'
+    // ]),
     handleAdd (e) {
       const content = e.target.value.trim()
       if (!content) {
@@ -125,9 +133,9 @@ export default {
       // this.todos = this.todos.filter(todo => !todo.completed)
       this.deleteAllCompleted()
     },
-    handleChangeTab (value) {
-      this.filter = value
-    }
+    // handleChangeTab (value) {
+    //   this.filter = value
+    // }
   }
 }
 </script>

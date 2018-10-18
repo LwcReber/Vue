@@ -4,14 +4,20 @@ import Component from './func-notification'
 const NotificationConstructor = Vue.extend(Component)
 
 const instances = []
-let seed  = 1
+let seed = 1
 
 // 销毁instance组件
 const removeInstance = (instance) => {
-  if(!instance) return
+  if (!instance) return
   const len = instances.length
   const index = instances.findIndex(inst => instance.id === inst.id)
   instances.splice(index, 1)
+  if (len <= 1) return
+  const removeHeight = instance.vm.height
+  for (let i = index; i < len - 1; i++) {
+    instances[i].verticalOffset =
+    parseInt(instances[i].verticalOffset) - removeHeight - 16
+  }
 }
 
 const notify = (options) => {
@@ -19,7 +25,7 @@ const notify = (options) => {
   const {
     autoClose,
     ...rest
-  } = options;
+  } = options
   const instance = new NotificationConstructor({
     propsData: {
       ...rest
@@ -33,8 +39,9 @@ const notify = (options) => {
   instance.id = id
   instance.vm = instance.$mount()
   document.body.appendChild(instance.vm.$el)
+  instance.vm.visible = true
 
-  let verticalOffset = 0; // 默认右下角
+  let verticalOffset = 0 // 默认右下角
   // 不断往上堆
   instances.forEach(item => {
     verticalOffset += item.$el.offsetHeight + 16
@@ -47,6 +54,9 @@ const notify = (options) => {
     removeInstance(instance)
     document.body.removeChild(instance.vm.$el) // 删除节点
     instance.vm.$destroy()
+  })
+  instance.vm.$on('close', () => {
+    instance.vm.visible = false
   })
   return instance.vm
 }

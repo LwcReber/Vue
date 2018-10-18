@@ -2,7 +2,7 @@
 export default {
   name: 'Tab',
   props: {
-    index: {
+    index: { // 是否要选中
       required: true,
       type: [Number, String]
     },
@@ -12,17 +12,15 @@ export default {
     }
   },
   mounted () {
-    this.$parent.panes.push(this)
+
   },
   computed: {
     active () {
-      return this.$parent.value === this.index
+      return false
     }
   },
   methods: {
-    handleClick () {
-      this.$parent.onChange(this.index)
-    }
+
   },
   render () {
     const tab = this.$slots.label || <span>{this.label}</span>
@@ -31,7 +29,7 @@ export default {
       active: this.active
     }
     return (
-      <li class={classNames} on-click={this.handleClick}>
+      <li class={classNames}>
         {tab}
       </li>
     )
