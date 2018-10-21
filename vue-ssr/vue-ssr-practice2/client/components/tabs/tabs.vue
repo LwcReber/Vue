@@ -8,14 +8,30 @@ export default {
       required: true
     }
   },
+  components: {
+    TabContainer
+  },
+  data () {
+    return {
+      panes: []
+    }
+  },
+
   render () {
+
     return (
       <div class="tabs">
         <ul class="tabs-header">
           {this.$slots.default}
         </ul>
+       <tab-container panes={this.panes}/>
       </div>
     )
+  },
+  methods: {
+    onChange (index) {
+      this.$emit('change', index)
+    }
   }
 }
 </script>

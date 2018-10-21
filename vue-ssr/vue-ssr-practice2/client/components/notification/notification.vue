@@ -43,9 +43,9 @@ export default {
     afterLeave () {
       this.$emit('closed') // 动画结束后的关闭
     },
-     afterEnter () {},
-     clearTimer () {},
-     createTimer () {}
+    afterEnter () {},
+    clearTimer () {},
+    createTimer () {}
   }
 }
 </script>
