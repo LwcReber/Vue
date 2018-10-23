@@ -2,7 +2,12 @@ const Koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
 
+const apiRouter = require('./routers/api')
 const staticRouter = require('./routers/static')
+const createDb = require('./db/db')
+const config = require('../app.config')
+
+const db = createDb(config.db.appId,  config.db.appKey)
 
 const  app = new Koa()
 
@@ -25,6 +30,11 @@ app.use(async (ctx, next) => {
   }
 })
 
+app.use(async (ctx, next) => {
+  ctx.db = db;
+  await next()
+})
+
 // favicon.ico 处理
 app.use(async (ctx, next) => {
   if (ctx.path === '/favicon.ico') {
@@ -35,7 +45,7 @@ app.use(async (ctx, next) => {
 })
 
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
-
+app.use(apiRouter.routes()).use(apiRouter.allowedMethods())
 
 let pageRouter
 if (isDev) {

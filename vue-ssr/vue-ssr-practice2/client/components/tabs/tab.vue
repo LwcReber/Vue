@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     active () {
-      return this.$parent.value == this.index
+      return this.$parent.value === this.index
     }
   },
   methods: {

@@ -18,6 +18,7 @@
       v-for="todo in filteredTodos"
       :key="todo.id"
       @del="deleteTodo"
+      @toggle="toggleTodoState"
     />
     <helper
       :filter="filter"
@@ -69,6 +70,14 @@ export default {
     },
     clearAllCompleted () {
       this.todos = this.todos.filter(todo => !todo.completed)
+    },
+    toggleTodoState (todo) {
+      // this.updateTodo({
+      //   id: todo.id,
+      //   todo: Object.assign({}, todo, {
+      //     completed: !todo.completed
+      //   })
+      // })
     },
     handleChangeTab (value) {
       this.filter = value

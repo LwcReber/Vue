@@ -23,7 +23,7 @@ const defaultPluins = [
 
 const devServer = {
   port: 8000,
-  host: '0.0.0.0',
+  host: '127.0.0.1',
   overlay: {
     errors: true
   },
@@ -31,10 +31,10 @@ const devServer = {
   historyApiFallback: {
     index: '/public/index.html'
   },
-  proxy: {
-    '/api': 'http://127.0.0.1:3333',
-    '/user': 'http://127.0.0.1:3333'
-  },
+  // proxy: {
+  //   '/api': 'http://127.0.0.1:3333',
+  //   '/user': 'http://127.0.0.1:3333'
+  // },
   hot: true
 }
 

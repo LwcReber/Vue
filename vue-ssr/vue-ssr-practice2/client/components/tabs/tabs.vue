@@ -18,13 +18,12 @@ export default {
   },
 
   render () {
-
     return (
       <div class="tabs">
         <ul class="tabs-header">
           {this.$slots.default}
         </ul>
-       <tab-container panes={this.panes}/>
+        <tab-container panes={this.panes}/>
       </div>
     )
   },
