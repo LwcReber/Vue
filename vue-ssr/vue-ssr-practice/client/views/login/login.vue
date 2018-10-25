@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import {
-  mapActions
-} from 'vuex'
+// import {
+//   mapActions
+// } from 'vuex'
 export default {
   metaInfo: {
     title: 'Login Page'
@@ -37,7 +37,7 @@ export default {
     }
   },
   mouted () {
-    console.log('login');
+    console.log('login')
   },
   methods: {
     // ...mapActions(['login']),
