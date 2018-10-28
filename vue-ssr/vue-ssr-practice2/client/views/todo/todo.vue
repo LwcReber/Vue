@@ -35,7 +35,6 @@ import {
 import Item from './item.vue'
 import helper from './helper.vue'
 
-
 export default {
   metaInfo: {
     title: 'the todo app'

@@ -4,10 +4,9 @@ export default {
     state.count = num
   },
   fillTodos (state, todos) {
-    try {
-      state.todos = todos
-    } catch (error) {
-      console.log(error)
-    }
+    state.todos = todos
+  },
+  doLogin (state, userInfo) {
+    state.user = userInfo
   }
 }
