@@ -15,7 +15,7 @@
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/",
     "precommit": "npm run lint-fix",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
-    "dev:server": "cross-env NODE_ENV=development node server/server.js",
+    "dev:server": "nodemon server/server.js",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "start": "cross-env NODE_ENV=production node server/server.js"
   },
@@ -28,7 +28,7 @@
     "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",
     "koa-send": "^4.1.2",
-    "koa-session": "^5.8.1",
+    "koa-session": "^5.9.0",
     "sha1": "^1.1.1",
     "vue": "2.5.13",
     "vue-meta": "^1.4.3",

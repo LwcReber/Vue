@@ -13,11 +13,11 @@ Vue.use(Vuex)
 const router = createRouter()
 const store = createStore()
 
-store.registerModule('c', {
-  state: {
-    text: 3
-  }
-})
+// store.registerModule('c', {
+//   state: {
+//     text: 3
+//   }
+// })
 
 // store.watch((state) => state.count + 1, (newCount) => {
 //   console.log('new count watched:', newCount)

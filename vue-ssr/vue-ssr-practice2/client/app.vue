@@ -15,7 +15,6 @@
 <script>
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
-import Todo from './layout/todo.vue'
 
 export default {
   metaInfo: {
@@ -24,7 +23,6 @@ export default {
   components: {
     Header,
     Footer,
-    Todo
   },
   mounted () {
 

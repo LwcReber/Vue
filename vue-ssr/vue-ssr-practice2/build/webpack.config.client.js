@@ -5,7 +5,7 @@ const merge = require('webpack-merge')
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
 const VueClientPlugin = require('vue-server-renderer/client-plugin')
-const cdnConfig = require('../app.config').cdn
+// const cdnConfig = require('../app.config').cdn
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -23,18 +23,18 @@ const defaultPluins = [
 
 const devServer = {
   port: 8000,
-  host: '127.0.0.1',
+  host: '0.0.0.0',
   overlay: {
     errors: true
   },
-  headers: { 'Access-Control-Allow-Origin': '*' }, // 解决热更新跨域问题
+  headers: { 'Access-Control-Allow-Origin': '*' },
   historyApiFallback: {
     index: '/public/index.html'
   },
-  // proxy: {
-  //   '/api': 'http://127.0.0.1:3333',
-  //   '/user': 'http://127.0.0.1:3333'
-  // },
+  proxy: {
+    '/api': 'http://127.0.0.1:3333',
+    '/user': 'http://127.0.0.1:3333'
+  },
   hot: true
 }
 

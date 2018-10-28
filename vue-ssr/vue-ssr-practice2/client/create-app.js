@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import Meta from 'vue-meta'
 import App from './app.vue'
-// import createStore from './store/store'
+import createStore from './store/store'
 import createRouter from './config/router'
 import Notification from './components/notification'
 import Tabs from './components/tabs'
@@ -17,10 +17,10 @@ Vue.use(Tabs)
 
 export default () => {
   const router = createRouter()
-  // const createStore()
+  const store = createStore()
   const app = new Vue({
     router,
-    // store,
+    store,
     render: h => h(App)
   })
   return { app, router }

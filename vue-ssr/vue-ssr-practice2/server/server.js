@@ -1,28 +1,36 @@
 const Koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
+const KoaBody = require('koa-body')
+const koaSession = require('koa-session')
 
 const apiRouter = require('./routers/api')
 const staticRouter = require('./routers/static')
 const createDb = require('./db/db')
+const userRouter = require('./routers/user')
 const config = require('../app.config')
 
-const db = createDb(config.db.appId,  config.db.appKey)
+const db = createDb(config.db.appId, config.db.appKey)
 
-const  app = new Koa()
+const app = new Koa()
 
-const isDev = process.env.NODE_ENV  === 'development' // 服务端渲染需要区分开发环境或者生产环境，不同环境差别大
+const isDev = process.env.NODE_ENV === 'development' // 服务端渲染需要区分开发环境或者生产环境，不同环境差别大
 
+app.keys = ['vue ssr tech']
+app.use(koaSession({
+  key: 'v-ssr-id',
+  maxAge: 2 * 60 * 60 * 1000
+}, app))
 
-// 中间件 可以拍查错误
+// 中间件 可以排查错误
 app.use(async (ctx, next) => {
   try {
-    console.log(`request with path ${ctx.path}`);
+    console.log(`request with path ${ctx.path}`)
     await next()
   } catch (err) {
-    console.log(err);
-    ctx.status = 500;
-    if(isDev) {
+    console.log(err)
+    ctx.status = 500
+    if (isDev) {
       ctx.body = err.message
     } else {
       ctx.body = 'please try again later'
@@ -31,7 +39,7 @@ app.use(async (ctx, next) => {
 })
 
 app.use(async (ctx, next) => {
-  ctx.db = db;
+  ctx.db = db
   await next()
 })
 
@@ -43,7 +51,9 @@ app.use(async (ctx, next) => {
     await next()
   }
 })
-
+// 处理请求的body数据
+app.use(KoaBody())
+app.use(userRouter.routes()).use(userRouter.allowedMethods())
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
 app.use(apiRouter.routes()).use(apiRouter.allowedMethods())
 
@@ -51,7 +61,7 @@ let pageRouter
 if (isDev) {
   pageRouter = require('./routers/dev-ssr')
 } else {
-   pageRouter = require('./routers/ssr')
+  pageRouter = require('./routers/ssr')
 }
 
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
