@@ -42,8 +42,16 @@ export default {
         handleError(err)
       })
   },
+  updateTodo ({commit}, {id, todo}) {
+    model.updateTodo(id, todo)
+      .then(data => {
+        commit('updateTodo', {id, todo: data})
+      }).catch(err => {
+        handleError(err)
+      })
+  },
   deleteTodo ({commit}, id) {
-    model.createTodo(id)
+    model.deleteTodo(id)
       .then(data => {
         commit('deleteTodo', id)
         notify({
@@ -55,9 +63,11 @@ export default {
   },
   deleteAllCompleted ({commit, state}) {
     const ids = state.todos.filter(t => t.completed).map(t => t.id)
-    model.delteAllCompleted(ids)
+    console.log(ids);
+
+    model.deleteAllCompleted(ids)
       .then(data => {
-        commit('delteAllCompleted')
+        commit('deleteAllCompleted')
         notify({
           content: '清理一下。。。 '
         })

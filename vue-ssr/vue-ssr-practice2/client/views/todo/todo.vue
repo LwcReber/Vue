@@ -86,18 +86,14 @@ export default {
       e.target.value = ''
     },
 
-    deleteTodo (id) {
-      // this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
-    },
     clearAllCompleted () {
-      // this.todos = this.todos.filter(todo => !todo.completed)
       this.deleteAllCompleted()
     },
     toggleTodoState (todo) {
       this.updateTodo({
         id: todo.id,
         todo: Object.assign({}, todo, {
-          computed: !todo.computed
+          completed: !todo.completed
         })
       })
     },
