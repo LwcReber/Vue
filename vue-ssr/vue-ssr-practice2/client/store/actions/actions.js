@@ -23,50 +23,64 @@ export default {
     }, data.time)
   },
   fetchTodos ({ commit }) {
+    commit('startLoading')
     model.getAllTodos()
       .then(data => {
+        commit('endLoading')
         commit('fillTodos', data)
       })
       .catch(err => {
+        commit('endLoading')
         handleError(err)
       })
   },
   addTodo ({commit}, todo) {
+    commit('startLoading')
     model.createTodo(todo)
       .then(data => {
+        commit('endLoading')
         commit('addTodo', data)
         notify({
           content: '你又多了一件事要做'
         })
       }).catch(err => {
+        commit('endLoading')
         handleError(err)
       })
   },
   updateTodo ({commit}, {id, todo}) {
+    commit('startLoading')
     model.updateTodo(id, todo)
       .then(data => {
+        commit('endLoading')
         commit('updateTodo', {id, todo: data})
       }).catch(err => {
+        commit('endLoading')
         handleError(err)
       })
   },
   deleteTodo ({commit}, id) {
+    commit('startLoading')
     model.deleteTodo(id)
       .then(data => {
+        commit('endLoading')
         commit('deleteTodo', id)
         notify({
           content: '你又少了一件事要做'
         })
       }).catch(err => {
+        commit('endLoading')
         handleError(err)
       })
   },
   deleteAllCompleted ({commit, state}) {
+    commit('startLoading')
     const ids = state.todos.filter(t => t.completed).map(t => t.id)
-    console.log(ids);
+    console.log(ids)
 
     model.deleteAllCompleted(ids)
-      .then(data => {
+      .then(() => {
+        commit('endLoading')
         commit('deleteAllCompleted')
         notify({
           content: '清理一下。。。 '
@@ -76,14 +90,17 @@ export default {
       })
   },
   login ({commit}, { username, password }) {
+    commit('startLoading')
     console.log(username)
     return new Promise((resolve, reject) => {
       model.login(username, password)
         .then(data => {
+          commit('endLoading')
           commit('doLogin', data)
           notify({content: '登录成功'})
           resolve()
         }).catch(err => {
+          commit('endLoading')
           notify({
             content: '抱歉，登录失败，请确认用户名或者密码是否正确'
           })

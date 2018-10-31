@@ -1,9 +1,14 @@
 <template>
   <div id="app">
+    <div id="loading" v-show="loading">
+      <loading/>
+    </div>
     <div id="cover"></div>
 
     <Header>3243213211</Header>
-    <router-view></router-view>
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
 
 
     <!-- <notification  content="test notify"/> -->
@@ -13,16 +18,23 @@
 </template>
 
 <script>
+import {
+  mapState
+} from 'vuex'
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
-
+import loading from './components/loading/loading.vue'
 export default {
   metaInfo: {
     title: 'reber\'s todo app'
   },
   components: {
     Header,
-    Footer
+    Footer,
+    loading
+  },
+  computed: {
+    ...mapState(['loading'])
   },
   mounted () {
 
@@ -55,5 +67,17 @@ export default {
   background-color #999
   opacity .9
   z-index -1
+}
+#loading {
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  background-color  rgba(255,255,255, .3)
+  z-index 99
+  display flex
+  align-items center
+  justify-content center
 }
 </style>

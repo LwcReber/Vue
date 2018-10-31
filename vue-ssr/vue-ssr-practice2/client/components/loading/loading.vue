@@ -1,9 +1,17 @@
 <template>
-  <div class="spinner">
-    <div class="dot1"></div>
-    <div class="dot2"></div>
+  <div>
+    <div class="spinner">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+    </div>
   </div>
 </template>
+
+<script>
+  export default {
+
+  }
+</script>
 
 <style lang="stylus" scoped>
 .spinner {
@@ -45,4 +53,3 @@
   }
 }
 </style>
-
