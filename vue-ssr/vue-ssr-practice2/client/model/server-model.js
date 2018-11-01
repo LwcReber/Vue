@@ -1,8 +1,9 @@
 const config = require('../../app.config')
-const creatDb = require('../../server/db/db')
+const createDb = require('../../server/db/db')
 
-const db = creatDb(config.db.appId, config.db.appKey)
+const db = createDb(config.db.appId, config.db.appKey)
 
+// 服务端渲染做一些获取数据的操作
 export default {
   getAllTodos () {
     return db.getAllTodos()
