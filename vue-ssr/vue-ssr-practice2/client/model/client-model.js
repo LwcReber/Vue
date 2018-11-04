@@ -20,7 +20,6 @@ const handleRequest = (request) => {
       resolve(data.data)
     }).catch(err => {
       const resp = err.response
-      console.log(resp)
       if (resp.status === 401) {
         // 传给actions处理
         reject(createError(401, 'need auth'))

@@ -76,7 +76,6 @@ export default {
   deleteAllCompleted ({commit, state}) {
     commit('startLoading')
     const ids = state.todos.filter(t => t.completed).map(t => t.id)
-    console.log(ids)
 
     model.deleteAllCompleted(ids)
       .then(() => {
