@@ -59,9 +59,12 @@ app.use(apiRouter.routes()).use(apiRouter.allowedMethods())
 
 let pageRouter
 if (isDev) {
-  pageRouter = require('./routers/dev-ssr')
+  // pageRouter = require('./routers/dev-ssr')
+  // 如果使用no-bundle的方式，client的页面router 引入不能使用异步加载，需要先import，然后直接指定对应的页面
+  pageRouter = require('./routers/dev-ssr-no-bundle')
 } else {
-  pageRouter = require('./routers/ssr')
+  // pageRouter = require('./routers/ssr')
+  pageRouter = require('./routers/ssr-no-bundle')
 }
 
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())

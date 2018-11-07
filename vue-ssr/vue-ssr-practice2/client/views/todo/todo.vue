@@ -40,14 +40,14 @@ export default {
     title: 'the todo app'
   },
   mounted () {
-    if(this.todos && this.todos.length < 1) {
+    if (this.todos && this.todos.length < 1) {
       this.fetchTodos()
     }
   },
   //
   asyncData ({store, router}) {
     // 判断有没有name属性，再去发送请求
-    if(store.state.user.username) {
+    if (store.state.user.username) {
       return store.dispatch('fetchTodos')
     }
     router.replace('/login')
