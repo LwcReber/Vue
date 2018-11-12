@@ -7,7 +7,6 @@ const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 let config
 const isDev = process.env.NODE_ENV === 'development'
-console.log(isDev)
 
 const plugins = [
   new ExtractPlugin('styles.[contentHash:8].css'),
